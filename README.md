@@ -5,54 +5,61 @@ Body Weight Logger with minimaistic UI
 Reading is great for learning, but it can only take you so far. This app is a place to put things into practice.
 
 Things I want to try:
- - Material Design + Material UI
- - "bring your own storage": This app won't have it's own cloud backend.
-   Instead it will rely on existing cloud accounts such as NextCloud, Dropbox, Google Drive, OneDrive.
-   Inspiration: draw.io, KeeWeb. File format will be something text based, potentially compressed.
- - CSS-in-JS, because Material UI comes with that and haven't had a chance to try out whether it's a good concpt
- - react-router
- - animated transitions, along the lines of what Material Design guidelines suggest
- - Progressive Web Apps: let's see how far they can take us
- - Writing out the decision making process
- 
+
+- Material Design + Material UI
+- "bring your own storage": This app won't have it's own cloud backend.
+  Instead it will rely on existing cloud accounts such as NextCloud, Dropbox, Google Drive, OneDrive.
+  Inspiration: draw.io, KeeWeb. File format will be something text based, potentially compressed.
+- CSS-in-JS, because Material UI comes with that and haven't had a chance to try out whether it's a good concept
+- react-router
+- animated transitions, along the lines of what Material Design guidelines suggest
+- Progressive Web Apps: let's see how far they can take us
+- Writing out the decision making process
+
+## TODO
+
+- CSV <del>parser</del>, writer
 
 ## Decisions
 
 ### Is text based file storage viable?
 
 #### Why is this a concern?
-Having dumb text files as a storage will require transfering the whole file on each change.
+
+Having dumb text files as a storage will require transferring the whole file on each change.
 WebDAV and other APIs don't seem to support any partial file transfers.
 
 #### Numbers:
+
 Data point (datetime+weight)
+
 ```js
-(new Date()).toISOString().length // 24
+new Date().toISOString().length; // 24
 ```
 
 Entry length = 24 (datetime) + 1 (comma) + 5 (weight) + 1 (new line)
-             = 31 bytes
+= 31 bytes
 
 Year worth of daily entries = 11 kB.
 
 #### Conclusion
+
 CSV is completely ok for this.
 
 ### Why React and create-react-app?
+
 React and JSX feel like a very natural extension of HTML and JS.
 
 ## Significant takeaways / things I didn't expect / things I learned
 
 ### Composability of Material UI
+
 In the beginning it bothered me that Material UI didn't come with premade common screen layouts. Assumption
 was that components that the AppBar, Floating Action Button and the main body of the app need to be composed
 in a specific way to look ok. This assumption is wrong. In the age of flexbox layout things got much simpler. Correct
-paddings and vertical stretching are much easier to achive nowadays. The components of Material UI are mostly
+paddings and vertical stretching are much easier to achieve nowadays. The components of Material UI are mostly
 self contained. They don't have margins outside and they are easy to position
 by wrapping them in a parent div with correct positioning attributes.
-
-
-
 
 ## create-react-app
 
@@ -84,4 +91,3 @@ The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-

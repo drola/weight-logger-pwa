@@ -1,7 +1,7 @@
 # weight-logger-pwa
 
 <p align="center">
-<a href="./img/screenshot.png"><img alt="Weight Logger PWA Screenshot" src="./img/screenshot_scaled.png"/></a>
+<a href="./img/screenshot.png"><img alt="Weight Logger PWA Screenshot" src="./img/screenshot_scaled.png"/></a><br/>
 Body Weight Logger with minimalistic UI
 </p>
 

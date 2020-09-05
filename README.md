@@ -1,6 +1,8 @@
-# weight-logger-pwa
+<div style="float: right">
+  <img alt="Tests Results Badge" src="https://github.com/drola/weight-logger-pwa/workflows/Tests/badge.svg"/>
+</div>
 
-![Run tests](https://github.com/drola/weight-logger-pwa/workflows/Tests/badge.svg)
+# weight-logger-pwa
 
 <p align="center">
 <a href="./img/screenshot.png"><img alt="Weight Logger PWA Screenshot" src="./img/screenshot_scaled.png"/></a><br/>

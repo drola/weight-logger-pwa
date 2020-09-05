@@ -1,6 +1,4 @@
-<span class="float-right">
-  <img alt="Tests Results Badge" src="https://github.com/drola/weight-logger-pwa/workflows/Tests/badge.svg"/>
-</span>
+<img alt="Tests Results Badge" src="https://github.com/drola/weight-logger-pwa/workflows/Tests/badge.svg" align="right"/>
 
 # weight-logger-pwa
 

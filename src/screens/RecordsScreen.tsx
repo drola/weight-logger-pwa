@@ -1,4 +1,5 @@
 import Container from "@material-ui/core/Container";
+import Fab from "@material-ui/core/Fab";
 import IconButton from "@material-ui/core/IconButton";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -8,14 +9,12 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
+import AddIcon from "@material-ui/icons/Add";
 import HomeIcon from "@material-ui/icons/Home";
 import React from "react";
-import Fab from "@material-ui/core/Fab";
-import AddIcon from "@material-ui/icons/Add";
+import { Link } from "react-router-dom";
 
 import Screen from "./Screen";
-import { makeStyles, createStyles, Theme } from "@material-ui/core";
-import { Link } from "react-router-dom";
 
 function createData(date: string, weight: number) {
   return { date, weight };
@@ -37,19 +36,7 @@ const rows = [
   createData("2020/08/01", 73.0),
 ];
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    fabContainer: {
-      textAlign: "right",
-      position: "sticky",
-      bottom: theme.spacing(2),
-    },
-  })
-);
-
 export default function RecordsScreen() {
-  const classes = useStyles();
-
   return (
     <Screen
       appBarContents={
@@ -86,14 +73,14 @@ export default function RecordsScreen() {
               </TableBody>
             </Table>
           </TableContainer>
-          <div className={classes.fabContainer}>
-            <Link to="/add">
-              <Fab color="primary">
-                <AddIcon />
-              </Fab>
-            </Link>
-          </div>
         </Container>
+      }
+      fastActionButton={
+        <Link to="/add">
+          <Fab color="primary">
+            <AddIcon />
+          </Fab>
+        </Link>
       }
     />
   );

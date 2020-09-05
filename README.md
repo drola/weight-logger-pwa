@@ -1,8 +1,11 @@
 # weight-logger-pwa
 
-Body Weight Logger with minimalistic UI
+<p align="center">
+  Body Weight Logger with minimalistic UI
 
 [![Weight Logger PWA Screenshot](./img/screenshot_scaled.png)](./img/screenshot.png)
+
+</p>
 
 Reading is great for learning, but it can only take you so far. This app is a place to put things into practice.
 

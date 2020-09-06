@@ -25,7 +25,8 @@ Things I want to try:
 
 ## TODO
 
-- CSV <del>parser</del>, writer
+- Simple home screen chart
+- CSV <del>parser</del>, <del>writer</del>
 
 ## Decisions
 

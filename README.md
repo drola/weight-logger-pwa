@@ -57,6 +57,12 @@ CSV is completely ok for this.
 
 React and JSX feel like a very natural extension of HTML and JS.
 
+### Dropbox integration
+
+- Oauth2
+- https://developer.mozilla.org/en-US/docs/Web/API/Crypto/subtle (SHA256, random values)
+- https://www.dropbox.com/lp/developers/reference/oauth-guide
+
 ## Significant takeaways / things I didn't expect / things I learned
 
 ### Composability of Material UI

@@ -8,6 +8,11 @@ import "./index.css";
 import App from "./App";
 import theme from "./theme";
 import * as serviceWorker from "./serviceWorker";
+import {
+  tryToParseCodeFromUrl,
+  tryReceiveDropboxToken,
+  generateAuthorizationLink,
+} from "./oauth";
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
@@ -23,3 +28,8 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+Object.assign(window, {
+  generateAuthorizationLink,
+  tryReceiveDropboxToken,
+});

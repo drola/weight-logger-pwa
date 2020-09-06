@@ -15,9 +15,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import Screen from "./Screen";
+import Chart from "../components/Chart";
+import { format } from "date-fns";
 
-function createData(date: string, weight: number) {
-  return { date, weight };
+function createData(datetime: string, weight: number) {
+  return { datetime: new Date(datetime), weight };
 }
 
 const rows = [
@@ -51,6 +53,7 @@ export default function RecordsScreen() {
       }
       mainContents={
         <Container>
+          <Chart data={rows} />
           <TableContainer style={{ overflowX: "visible" }}>
             <Table stickyHeader>
               <TableHead>
@@ -61,9 +64,9 @@ export default function RecordsScreen() {
               </TableHead>
               <TableBody>
                 {rows.map((row) => (
-                  <TableRow key={row.date}>
+                  <TableRow key={row.datetime.toISOString()}>
                     <TableCell component="th" scope="row">
-                      {row.date}
+                      {format(row.datetime, "MM/dd/yyyy")}
                     </TableCell>
                     <TableCell align="right">
                       {row.weight.toFixed(1)} kg

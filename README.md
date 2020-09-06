@@ -23,7 +23,8 @@ Things I want to try:
 
 ## TODO
 
-- Simple home screen chart
+- tests for chart utility functions
+- <del>Simple home screen chart</del>
 - CSV <del>parser</del>, <del>writer</del>
 
 ## Decisions

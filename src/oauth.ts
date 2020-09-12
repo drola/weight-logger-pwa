@@ -1,11 +1,9 @@
-import { dropboxClientId } from "../config";
-
-// Add TextEncoder to "util" object as expected by the Dropbox SDK
 let util = require("util");
 util.TextEncoder = window.TextEncoder;
 // Import non-minified version of the Dropbox SDK and disable type checks on it
 // because type declarations are out of dat
 let dropbox = require("dropbox/dist/Dropbox-sdk") as any;
+const dropboxClientId = process.env.REACT_APP_DROPBOX_CLIENT_ID;
 
 let redirectUrl = "http://localhost:3000";
 let dbx = new dropbox.Dropbox({

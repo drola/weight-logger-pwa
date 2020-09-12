@@ -1,4 +1,5 @@
 import { WeightLogRecord } from "../WeightLogRecord";
+import { minTime } from "date-fns";
 
 export function weightLogDataToXY(
   data: Array<WeightLogRecord>,
@@ -11,9 +12,9 @@ export function weightLogDataToXY(
   }));
 
   let timeMin = 0;
-  let timeMax = 1;
+  let timeMax = 0;
   let weightMin = 0;
-  let weightMax = 1;
+  let weightMax = 0;
   let x1 = 0;
   let x2 = chartWidth;
   let y1 = chartHeight;
@@ -27,6 +28,19 @@ export function weightLogDataToXY(
     weightMin = Math.min(...weights);
     weightMax = Math.max(...weights);
   }
+
+  const minTimeSpan = 3600 * 1000;
+  const timeSpanPadding = Math.max(0, minTimeSpan - (timeMax - timeMin));
+  timeMin -= timeSpanPadding / 2;
+  timeMax += timeSpanPadding / 2;
+
+  const minWeightSpan = 2;
+  const weightSpanPadding = Math.max(
+    0,
+    minWeightSpan - (weightMax - weightMin)
+  );
+  weightMin -= weightSpanPadding / 2;
+  weightMax += weightSpanPadding / 2;
 
   let kTime = (x2 - x1) / (timeMax - timeMin);
   let kWeight = (y2 - y1) / (weightMax - weightMin);

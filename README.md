@@ -23,11 +23,35 @@ Things I want to try:
 
 ## TODO
 
-- tests for chart utility functions
+- complete CRUD screens and integrate w redux state
+- install redux
+- <del>Outline structure of the app state</del>
+- <del>research local storage options</del> -> use IndexedDB
+- <del>tests for chart utility functions</del>
 - <del>Simple home screen chart</del>
 - CSV <del>parser</del>, <del>writer</del>
 
 ## Decisions
+
+### State
+
+```
+- Weight log entries
+- Index of the entry being edited
+- Storage connections: to IndexedDB, Dropbox, NextCloud
+```
+
+#### Actions
+
+```
+ - add log entry [entry data]
+ - update log entry [entry index, data]
+ - delete log entry [entry index]
+ - loaded log entries [list of entries]
+ - connect storage [type]
+ - import/export
+
+```
 
 ### Is text based file storage viable?
 

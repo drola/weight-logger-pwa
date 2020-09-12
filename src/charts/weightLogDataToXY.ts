@@ -1,6 +1,15 @@
 import { WeightLogRecord } from "../WeightLogRecord";
-import { minTime } from "date-fns";
 
+/**
+ * Converts list of WeightLogRecords into pairs of x-y coordinates
+ * for rendering a chart.
+ *
+ * [0, 0] is top-left corner and [chartWidth, chartHeight] is bottom-right.
+ *
+ * @param data
+ * @param chartWidth
+ * @param chartHeight
+ */
 export function weightLogDataToXY(
   data: Array<WeightLogRecord>,
   chartWidth: number,

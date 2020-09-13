@@ -11,34 +11,17 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import AddIcon from "@material-ui/icons/Add";
 import HomeIcon from "@material-ui/icons/Home";
+import { format } from "date-fns";
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import Screen from "./Screen";
 import Chart from "../components/Chart";
-import { format } from "date-fns";
-
-function createData(datetime: string, weight: number) {
-  return { datetime: new Date(datetime), weight };
-}
-
-const rows = [
-  createData("2020/08/13", 70.5),
-  createData("2020/08/12", 71.0),
-  createData("2020/08/11", 70.0),
-  createData("2020/08/10", 70.5),
-  createData("2020/08/09", 71.0),
-  createData("2020/08/08", 70.0),
-  createData("2020/08/07", 70.5),
-  createData("2020/08/06", 70.2),
-  createData("2020/08/05", 70.1),
-  createData("2020/08/04", 71.0),
-  createData("2020/08/03", 72.5),
-  createData("2020/08/02", 72.5),
-  createData("2020/08/01", 73.0),
-];
+import { selectWeightLogRecords } from "../state/weightLogRecords";
+import Screen from "./Screen";
 
 export default function RecordsScreen() {
+  let weightLogRecords = useSelector(selectWeightLogRecords);
   return (
     <Screen
       appBarContents={
@@ -53,7 +36,7 @@ export default function RecordsScreen() {
       }
       mainContents={
         <Container>
-          <Chart data={rows} />
+          <Chart data={weightLogRecords} />
           <TableContainer style={{ overflowX: "visible" }}>
             <Table stickyHeader>
               <TableHead>
@@ -63,7 +46,7 @@ export default function RecordsScreen() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
+                {weightLogRecords.map((row) => (
                   <TableRow key={row.datetime.toISOString()}>
                     <TableCell component="th" scope="row">
                       {format(row.datetime, "MM/dd/yyyy")}

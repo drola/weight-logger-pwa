@@ -24,7 +24,7 @@ Things I want to try:
 ## TODO
 
 - complete CRUD screens and integrate w redux state
-- install redux
+- <del>install redux</del>
 - <del>Outline structure of the app state</del>
 - <del>research local storage options</del> -> use IndexedDB
 - <del>tests for chart utility functions</del>

@@ -17,6 +17,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import Chart from "../components/Chart";
+import NoRecords from "../components/NoRecords";
 import { selectWeightLogRecords } from "../state/weightLogRecords";
 import Screen from "./Screen";
 
@@ -36,29 +37,35 @@ export default function RecordsScreen() {
       }
       mainContents={
         <Container>
-          <Chart data={weightLogRecords} />
-          <TableContainer style={{ overflowX: "visible" }}>
-            <Table stickyHeader>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Date</TableCell>
-                  <TableCell align="right">Weight</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {weightLogRecords.map((row) => (
-                  <TableRow key={row.datetime.toISOString()}>
-                    <TableCell component="th" scope="row">
-                      {format(row.datetime, "MM/dd/yyyy")}
-                    </TableCell>
-                    <TableCell align="right">
-                      {row.weight.toFixed(1)} kg
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+          {weightLogRecords.length ? (
+            <>
+              <Chart data={weightLogRecords} />
+              <TableContainer style={{ overflowX: "visible" }}>
+                <Table stickyHeader>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Date</TableCell>
+                      <TableCell align="right">Weight</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {weightLogRecords.map(row => (
+                      <TableRow key={row.datetime.toISOString()}>
+                        <TableCell component="th" scope="row">
+                          {format(row.datetime, "MM/dd/yyyy")}
+                        </TableCell>
+                        <TableCell align="right">
+                          {row.weight.toFixed(1)} kg
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </>
+          ) : (
+            <NoRecords />
+          )}
         </Container>
       }
       fastActionButton={

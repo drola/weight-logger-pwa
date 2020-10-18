@@ -17,7 +17,7 @@ import Screen from "./Screen";
 export default function AddRecord() {
   let [record, setRecord] = useState({ datetime: new Date(), weight: 70 });
   let [saved, setSaved] = useState(false);
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
 
   if (saved) {
@@ -46,7 +46,7 @@ export default function AddRecord() {
               variant="contained"
               color="secondary"
               fullWidth
-              onClick={(e) => {
+              onClick={e => {
                 dispatch(appendAction(record));
                 setSaved(true);
                 enqueueSnackbar("Saved", { variant: "success" });

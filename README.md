@@ -99,6 +99,13 @@ paddings and vertical stretching are much easier to achieve nowadays. The compon
 self contained. They don't have margins outside and they are easy to position
 by wrapping them in a parent div with correct positioning attributes.
 
+### Immer gotcha
+
+Plain `array.indexOf(...)` doesn't work when wrapped inside Immer because the array
+is actually an array of proxy objects.
+
+Use `array.findIndex(v => original(v) === myObj)` instead.
+
 ## create-react-app
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
 
-import { storageConnections } from "./storageConnections";
-import { weightLogRecords } from "./weightLogRecords";
+import storageConnections from "./storageConnections";
+import weightLogRecords from "./weightLogRecords";
 
 const rootReducer = combineReducers({
-  weightLogRecords: weightLogRecords.reducer,
-  storageConnections: storageConnections.reducer,
+  weightLogRecords: weightLogRecords,
+  storageConnections: storageConnections
 });
 
 export default rootReducer;

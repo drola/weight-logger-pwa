@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { original, current } from "immer";
+import { original } from "immer";
+
 import { WeightLogRecord } from "../WeightLogRecord";
 import { RootState } from "./rootReducer";
 
@@ -23,16 +24,28 @@ const initialState: Array<WeightLogRecord> = [
   createData("2020/08/01", 73.0)*/
 ];
 
+function sortWeightLogRecords(list: WeightLogRecord[]) {
+  list.sort((a, b) => b.datetime.getTime() - a.datetime.getTime());
+}
+
 const weightLogRecords = createSlice({
   name: "weightLogRecords",
   initialState,
   reducers: {
+    load: (
+      state: WeightLogRecord[],
+      action: { payload: WeightLogRecord[] }
+    ) => {
+      let newState = [...action.payload];
+      sortWeightLogRecords(newState);
+      return newState;
+    },
     append: (
       state: WeightLogRecord[],
       action: { payload: WeightLogRecord }
     ) => {
       state.push(action.payload);
-      state.sort((a, b) => b.datetime.getTime() - a.datetime.getTime()); // By date descending
+      sortWeightLogRecords(state);
     },
     delete: (
       state: WeightLogRecord[],
@@ -42,6 +55,19 @@ const weightLogRecords = createSlice({
       if (idx >= 0) {
         state.splice(idx, 1);
       }
+    },
+    update: (
+      state: WeightLogRecord[],
+      action: {
+        payload: { original: WeightLogRecord; updated: WeightLogRecord };
+      }
+    ) => {
+      let idx = state.findIndex(v => original(v) === action.payload.original);
+      if (idx < 0) {
+        return;
+      }
+      state[idx] = action.payload.updated;
+      sortWeightLogRecords(state);
     }
   }
 });
@@ -49,7 +75,9 @@ const weightLogRecords = createSlice({
 export const selectWeightLogRecords = (state: RootState) =>
   state.weightLogRecords;
 
+export const loadAction = weightLogRecords.actions.load;
 export const appendAction = weightLogRecords.actions.append;
 export const deleteAction = weightLogRecords.actions.delete;
+export const updateAction = weightLogRecords.actions.update;
 
 export default weightLogRecords.reducer;

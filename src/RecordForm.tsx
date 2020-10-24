@@ -1,7 +1,7 @@
 import InputAdornment from "@material-ui/core/InputAdornment";
 import TextField from "@material-ui/core/TextField";
 import { DateTimePicker } from "@material-ui/pickers";
-import React from "react";
+import React, { useState } from "react";
 
 import { WeightLogRecord } from "./WeightLogRecord";
 
@@ -10,23 +10,22 @@ export default function RecordForm(props: {
   onRecordChange: (e: WeightLogRecord) => void;
 }) {
   const { record, onRecordChange } = props;
+  const [weight, setWeight] = useState(record.weight.toString());
 
   return (
     <div>
       <TextField
         type="number"
         label="Weight"
-        id="standard-start-adornment"
         InputProps={{
-          endAdornment: <InputAdornment position="start">kg</InputAdornment>,
+          endAdornment: <InputAdornment position="end">kg</InputAdornment>,
         }}
         inputProps={{ step: "0.1" }}
         fullWidth
         margin="normal"
-        value={record.weight}
-        onChange={(e) =>
-          onRecordChange({ ...record, weight: Number(e.target.value) })
-        }
+        value={weight}
+        onBlur={(e) => onRecordChange({ ...record, weight: Number(weight) })}
+        onChange={(e) => setWeight(e.target.value)}
       />
 
       <DateTimePicker

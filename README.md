@@ -23,6 +23,7 @@ Things I want to try:
 
 ## TODO
 
+- Refactor: Do sorting on all displays/exports but not internally in reducers. This is to be able to refer records simply by their index
 - complete CRUD screens and integrate w redux state
 - <del>test reducers</del>
 - <del>install redux</del>

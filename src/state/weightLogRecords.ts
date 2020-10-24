@@ -8,8 +8,8 @@ export function createData(datetime: string, weight: number) {
   return { datetime: new Date(datetime), weight };
 }
 
-const initialState: Array<WeightLogRecord> = [
-  /*createData("2020/08/13", 70.5),
+export const exampleWeightLogRecords = [
+  createData("2020/08/13", 70.5),
   createData("2020/08/12", 71.0),
   createData("2020/08/11", 70.0),
   createData("2020/08/10", 70.5),
@@ -21,7 +21,10 @@ const initialState: Array<WeightLogRecord> = [
   createData("2020/08/04", 71.0),
   createData("2020/08/03", 72.5),
   createData("2020/08/02", 72.5),
-  createData("2020/08/01", 73.0)*/
+  createData("2020/08/01", 73.0)
+];
+
+const initialState: Array<WeightLogRecord> = [
 ];
 
 function sortWeightLogRecords(list: WeightLogRecord[]) {
@@ -33,7 +36,7 @@ const weightLogRecords = createSlice({
   initialState,
   reducers: {
     load: (
-      state: WeightLogRecord[],
+      _state: WeightLogRecord[],
       action: { payload: WeightLogRecord[] }
     ) => {
       let newState = [...action.payload];

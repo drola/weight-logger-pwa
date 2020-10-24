@@ -1,11 +1,11 @@
-import { Card, CardContent, makeStyles, Typography } from "@material-ui/core";
+import { Card, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "1rem",
-    padding: `${theme.spacing(2)}px !important`
-  }
+    padding: `${theme.spacing(2)}px !important`,
+  },
 }));
 export default function NoRecords() {
   const classes = useStyles();

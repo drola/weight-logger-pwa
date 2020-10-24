@@ -8,27 +8,27 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/pickers": "^3.2.10",
     "@reduxjs/toolkit": "^1.4.0",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
-    "@types/jest": "^24.9.1",
-    "@types/node": "^12.12.54",
-    "@types/react": "^16.9.46",
+    "@testing-library/jest-dom": "^5.11.5",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^14.14.2",
+    "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
     "@types/react-redux": "^7.1.9",
-    "date-fns": "^2.15.0",
-    "dropbox": "^5.2.1",
+    "date-fns": "^2.16.1",
+    "dropbox": "^7.2.1",
     "fontsource-roboto": "^3.0.3",
-    "immer": "^7.0.9",
+    "immer": "^7.0.14",
     "immutable": "^4.0.0-rc.12",
-    "notistack": "^1.0.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "notistack": "^1.0.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3",
+    "react-scripts": "4.0.0",
     "redux": "^4.0.5",
-    "typescript": "^3.7.5",
+    "typescript": "^4.0.3",
     "use-resize-observer": "^6.1.0"
   },
   "scripts": {
@@ -53,6 +53,6 @@
     ]
   },
   "devDependencies": {
-    "@types/react-router-dom": "^5.1.5"
+    "@types/react-router-dom": "^5.1.6"
   }
 }

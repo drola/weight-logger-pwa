@@ -23,7 +23,8 @@ Things I want to try:
 
 ## TODO
 
-- Refactor: Do sorting on all displays/exports but not internally in reducers. This is to be able to refer records simply by their index
+-
+- <del>Refactor: Do sorting on all displays/exports but not internally in reducers. This is to be able to refer records simply by their index - not needed anymore</del>
 - complete CRUD screens and integrate w redux state
 - <del>test reducers</del>
 - <del>install redux</del>
@@ -34,6 +35,12 @@ Things I want to try:
 - CSV <del>parser</del>, <del>writer</del>
 
 ## Decisions
+
+### Identifying objects in URLs?
+
+- hash: problem if two records have same date + weight
+- indices: volatile - they can change after date on record changed and records sorted
+- **WINNER**: Unique records IDs, valid only within Redux state - not stored in the CSV.
 
 ### State
 
@@ -52,7 +59,6 @@ Things I want to try:
  - loaded log entries [list of entries]
  - connect storage [type]
  - import/export
-
 ```
 
 ### Is text based file storage viable?

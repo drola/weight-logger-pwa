@@ -19,7 +19,10 @@ import { useSelector } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import Chart from "../components/Chart";
 import NoRecords from "../components/NoRecords";
-import { selectWeightLogRecords } from "../state/weightLogRecords";
+import {
+  selectWeightLogRecords,
+  WeightLogRecordSlot,
+} from "../state/weightLogRecords";
 import Screen from "./Screen";
 
 const useStyles = makeStyles((theme) => ({
@@ -35,8 +38,8 @@ export default withRouter(function RecordsScreen(props) {
 
   let weightLogRecords = useSelector(selectWeightLogRecords);
 
-  const handleClickRecord = (recordIndex: number) => {
-    props.history.push(`/edit/${recordIndex}`);
+  const handleClickRecord = (weightLogRecordSlot: WeightLogRecordSlot) => {
+    props.history.push(`/edit/${weightLogRecordSlot.uid}`);
   };
 
   return (
@@ -62,7 +65,7 @@ export default withRouter(function RecordsScreen(props) {
         <Container>
           {weightLogRecords.length ? (
             <>
-              <Chart data={weightLogRecords} />
+              <Chart data={weightLogRecords.map((s) => s.record)} />
               <TableContainer style={{ overflowX: "visible" }}>
                 <Table stickyHeader>
                   <TableHead>
@@ -74,16 +77,16 @@ export default withRouter(function RecordsScreen(props) {
                   <TableBody>
                     {weightLogRecords.map((row, i) => (
                       <TableRow
-                        key={row.datetime.toISOString()}
+                        key={row.uid}
                         hover
                         className={classes.tableRow}
-                        onClick={(e) => handleClickRecord(i)}
+                        onClick={(e) => handleClickRecord(row)}
                       >
                         <TableCell component="th" scope="row">
-                          {format(row.datetime, "MM/dd/yyyy")}
+                          {format(row.record.datetime, "MM/dd/yyyy")}
                         </TableCell>
                         <TableCell align="right">
-                          {row.weight.toFixed(1)} kg
+                          {row.record.weight.toFixed(1)} kg
                         </TableCell>
                       </TableRow>
                     ))}

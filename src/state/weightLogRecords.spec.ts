@@ -16,12 +16,12 @@ describe("weightLogRecords reducer", () => {
       [],
       appendAction(createData("2020/10/10", 100))
     );
-    expect(state).toEqual([createData("2020/10/10", 100)]);
+    expect(state.map(s => s.record)).toEqual([createData("2020/10/10", 100)]);
     state = weightLogRecords(
       state,
       appendAction(createData("2020/10/15", 110))
     );
-    expect(state).toEqual([
+    expect(state.map(s => s.record)).toEqual([
       createData("2020/10/15", 110),
       createData("2020/10/10", 100)
     ]);
@@ -29,7 +29,7 @@ describe("weightLogRecords reducer", () => {
       state,
       appendAction(createData("2020/10/12", 112))
     );
-    expect(state).toEqual([
+    expect(state.map(s => s.record)).toEqual([
       createData("2020/10/15", 110),
       createData("2020/10/12", 112),
       createData("2020/10/10", 100)
@@ -37,12 +37,12 @@ describe("weightLogRecords reducer", () => {
   });
 
   it("deleteAction should remove records", () => {
-    let state = [
+    let state = weightLogRecords([], loadAction([
       createData("2020/08/10", 80),
       createData("2020/08/09", 81),
       createData("2020/08/08", 82)
-    ];
-    expect(weightLogRecords(state, deleteAction(state[1]))).toEqual([
+    ]));
+    expect(weightLogRecords(state, deleteAction(state[1])).map(s => s.record)).toEqual([
       createData("2020/08/10", 80),
       createData("2020/08/08", 82)
     ]);
@@ -57,7 +57,7 @@ describe("weightLogRecords reducer", () => {
           createData("2020/08/10", 82),
           createData("2020/08/09", 81)
         ])
-      )
+      ).map(s => s.record)
     ).toEqual([
       createData("2020/08/10", 82),
       createData("2020/08/09", 81),
@@ -66,19 +66,19 @@ describe("weightLogRecords reducer", () => {
   });
 
   it("updateAction should update data on an existing record; resulting state should be sorted", () => {
-    let state = [
+    let state = weightLogRecords([], loadAction( [
       createData("2020/08/10", 80),
       createData("2020/08/09", 81),
       createData("2020/08/08", 82)
-    ];
+    ]));
     expect(
       weightLogRecords(
         state,
         updateAction({
-          original: state[1],
+          slot: state[1],
           updated: createData("2020/08/11", 81)
         })
-      )
+      ).map(s => s.record)
     ).toEqual([
       createData("2020/08/11", 81),
       createData("2020/08/10", 80),

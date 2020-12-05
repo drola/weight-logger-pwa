@@ -1,8 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { original } from "immer";
 
 import { WeightLogRecord } from "../WeightLogRecord";
 import { RootState } from "./rootReducer";
+
+let lastId = 0;
+function nextId(): string {
+  lastId = lastId + 1;
+  return lastId.toString();
+}
+
+
+export interface WeightLogRecordSlot {
+  uid: string;
+  record: WeightLogRecord;
+}
+
+function wrapWeightLogRecord(record: WeightLogRecord): WeightLogRecordSlot {
+  return {uid: nextId(), record}
+}
+
 
 export function createData(datetime: string, weight: number) {
   return { datetime: new Date(datetime), weight };
@@ -24,11 +40,11 @@ export const exampleWeightLogRecords = [
   createData("2020/08/01", 73.0)
 ];
 
-const initialState: Array<WeightLogRecord> = [
+const initialState: Array<WeightLogRecordSlot> = [
 ];
 
-function sortWeightLogRecords(list: WeightLogRecord[]) {
-  list.sort((a, b) => b.datetime.getTime() - a.datetime.getTime());
+function sortWeightLogRecords(list: WeightLogRecordSlot[]) {
+  list.sort((a, b) => b.record.datetime.getTime() - a.record.datetime.getTime());
 }
 
 const weightLogRecords = createSlice({
@@ -36,40 +52,40 @@ const weightLogRecords = createSlice({
   initialState,
   reducers: {
     load: (
-      _state: WeightLogRecord[],
+      _state: WeightLogRecordSlot[],
       action: { payload: WeightLogRecord[] }
     ) => {
-      let newState = [...action.payload];
+      let newState = [...action.payload.map(wrapWeightLogRecord)];
       sortWeightLogRecords(newState);
       return newState;
     },
     append: (
-      state: WeightLogRecord[],
+      state: WeightLogRecordSlot[],
       action: { payload: WeightLogRecord }
     ) => {
-      state.push(action.payload);
+      state.push( wrapWeightLogRecord(action.payload));
       sortWeightLogRecords(state);
     },
     delete: (
-      state: WeightLogRecord[],
-      action: { payload: WeightLogRecord }
+      state: WeightLogRecordSlot[],
+      action: { payload: WeightLogRecordSlot }
     ) => {
-      let idx = state.findIndex(v => original(v) === action.payload);
+      let idx = state.findIndex(v => v.uid === action.payload.uid);
       if (idx >= 0) {
         state.splice(idx, 1);
       }
     },
     update: (
-      state: WeightLogRecord[],
+      state: WeightLogRecordSlot[],
       action: {
-        payload: { original: WeightLogRecord; updated: WeightLogRecord };
+        payload: { slot: WeightLogRecordSlot; updated: WeightLogRecord };
       }
     ) => {
-      let idx = state.findIndex(v => original(v) === action.payload.original);
+      let idx = state.findIndex(v => v.uid === action.payload.slot.uid);
       if (idx < 0) {
         return;
       }
-      state[idx] = action.payload.updated;
+      state[idx].record = action.payload.updated;
       sortWeightLogRecords(state);
     }
   }

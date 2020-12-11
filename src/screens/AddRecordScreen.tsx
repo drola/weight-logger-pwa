@@ -46,7 +46,7 @@ export default function AddRecord() {
               variant="contained"
               color="secondary"
               fullWidth
-              onClick={e => {
+              onClick={(e) => {
                 dispatch(appendAction(record));
                 setSaved(true);
                 enqueueSnackbar("Saved", { variant: "success" });

@@ -20,7 +20,7 @@ function App() {
         <Route path="/add">
           <AddRecordScreen />
         </Route>
-        <Route path="/edit/:recordIndex">
+        <Route path="/edit/:uid">
           <EditRecordScreen />
         </Route>
         <Route path="/settings">

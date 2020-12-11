@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 
-import { WeightLogRecord } from "../WeightLogRecord";
-import { RootState } from "./rootReducer";
+import { WeightLogRecord } from '../WeightLogRecord';
+import { RootState } from './rootReducer';
 
 let lastId = 0;
 function nextId(): string {
@@ -93,6 +93,11 @@ const weightLogRecords = createSlice({
 
 export const selectWeightLogRecords = (state: RootState) =>
   state.weightLogRecords;
+
+export const makeGetWeightLogRecordSlot = (uid: string) => {
+  // createSelector provides memoization
+  return createSelector([selectWeightLogRecords], (slots) => slots.find(slot => slot.uid === uid))
+}
 
 export const loadAction = weightLogRecords.actions.load;
 export const appendAction = weightLogRecords.actions.append;

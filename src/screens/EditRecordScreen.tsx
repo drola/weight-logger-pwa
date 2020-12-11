@@ -8,12 +8,17 @@ import Typography from "@material-ui/core/Typography";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { useSnackbar } from "notistack";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import React, { useCallback, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, Redirect, useParams } from "react-router-dom";
 
 import RecordForm from "../RecordForm";
-import { appendAction } from "../state/weightLogRecords";
+import {
+  deleteAction,
+  makeGetWeightLogRecordSlot,
+  updateAction,
+} from "../state/weightLogRecords";
+import { WeightLogRecord } from "../WeightLogRecord";
 import Screen from "./Screen";
 
 const useStyles = makeStyles((theme) => ({
@@ -22,18 +27,40 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const useRecordSlot = (uid: string) =>
+  useSelector(useCallback(makeGetWeightLogRecordSlot(uid), [uid]));
+
 export default function EditRecordScreen() {
-  let [record, setRecord] = useState({ datetime: new Date(), weight: 70 });
+  const { uid } = useParams<{ uid: string }>();
+  const slot = useRecordSlot(uid);
+  let [record, setRecord] = useState<null | WeightLogRecord>(null);
+  if (!record && slot) {
+    setRecord(slot.record);
+  }
+
   let [saved, setSaved] = useState(false);
+  let [deleted, setDeleted] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  const handleDelete = () => {
-    console.log("Delete");
-  };
+  const handleDelete = useCallback(() => {
+    if (slot) {
+      dispatch(deleteAction(slot));
+      setDeleted(true);
+      enqueueSnackbar("Deleted", { variant: "success" });
+    }
+  }, [slot]);
 
-  if (saved) {
+  const handleSave = useCallback(() => {
+    if (record && slot) {
+      dispatch(updateAction({ slot, updated: record }));
+      setSaved(true);
+      enqueueSnackbar("Saved", { variant: "success" });
+    }
+  }, [slot, record]);
+
+  if (saved || deleted) {
     return <Redirect to="/" />;
   }
 
@@ -58,21 +85,23 @@ export default function EditRecordScreen() {
       }
       mainContents={
         <Container>
-          <RecordForm record={record} onRecordChange={setRecord} />
-          <Box my={2}>
-            <Button
-              variant="contained"
-              color="secondary"
-              fullWidth
-              onClick={(e) => {
-                dispatch(appendAction(record));
-                setSaved(true);
-                enqueueSnackbar("Saved", { variant: "success" });
-              }}
-            >
-              Update
-            </Button>
-          </Box>
+          {record ? (
+            <>
+              <RecordForm record={record} onRecordChange={setRecord} />
+              <Box my={2}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  fullWidth
+                  onClick={handleSave}
+                >
+                  Update
+                </Button>
+              </Box>
+            </>
+          ) : (
+            <></>
+          )}
         </Container>
       }
     />

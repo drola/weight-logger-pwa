@@ -23,7 +23,8 @@ Things I want to try:
 
 ## TODO
 
-- editing, deleting: load actual record based on the URL
+- Connection to Dropbox
+- <del>editing, deleting: load actual record based on the URL</del>
 - <del>Refactor: Do sorting on all displays/exports but not internally in reducers. This is to be able to refer records simply by their index - not needed anymore</del>
 - complete CRUD screens and integrate w redux state
 - <del>test reducers</del>

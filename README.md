@@ -23,10 +23,14 @@ Things I want to try:
 
 ## TODO
 
-- Connection to Dropbox
+- Connection to Dropbox:
+  - [x] Trigger and complete Dropbox OAuth flow
+  - [ ] Store received tokens
+  - [ ] If connected, indicate that in Settings
+  - [ ] Add syncing
 - <del>editing, deleting: load actual record based on the URL</del>
 - <del>Refactor: Do sorting on all displays/exports but not internally in reducers. This is to be able to refer records simply by their index - not needed anymore</del>
-- complete CRUD screens and integrate w redux state
+- <del>complete CRUD screens and integrate w redux state</del>
 - <del>test reducers</del>
 - <del>install redux</del>
 - <del>Outline structure of the app state</del>

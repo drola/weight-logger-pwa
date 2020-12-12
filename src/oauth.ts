@@ -1,29 +1,37 @@
+ // @ts-ignore
+import { Dropbox } from "dropbox/dist/Dropbox-sdk";
+
 let util = require("util");
 util.TextEncoder = window.TextEncoder;
 // Import non-minified version of the Dropbox SDK and disable type checks on it
 // because type declarations are out of dat
-let dropbox = require("dropbox/dist/Dropbox-sdk") as any;
 const dropboxClientId = process.env.REACT_APP_DROPBOX_CLIENT_ID;
 
-let redirectUrl = "http://localhost:3000";
-let dbx = new dropbox.Dropbox({
-  clientId: dropboxClientId,
-  fetch: window.fetch.bind(window), // Prevents "'fetch' called on an object that does not implement interface Window."
-});
+(window.crypto as any).randomBytes = require('randombytes');
+(window.crypto as any).createHash = require('create-hash');
 
-export function generateAuthorizationLink() {
-  let url = dbx.getAuthenticationUrl(
+const dbx = new Dropbox({
+  clientId: dropboxClientId,
+}) as any;
+export function generateAuthorizationLink(redirectUrl: string) {
+  if(!dropboxClientId) {
+    console.error('process.env.REACT_APP_DROPBOX_CLIENT_ID is not defined')
+    return
+  }
+
+  console.log(dbx)
+  let url = dbx.auth.getAuthenticationUrl(
     redirectUrl,
-    null,
+    undefined,
     "code",
     "offline",
-    null,
+    undefined,
     "none",
     true
   );
 
-  sessionStorage.setItem("codeChallenge", dbx.codeChallenge);
-  sessionStorage.setItem("codeVerifier", dbx.codeVerifier);
+  sessionStorage.setItem("codeChallenge", dbx.auth.codeChallenge);
+  sessionStorage.setItem("codeVerifier", dbx.auth.codeVerifier);
 
   return url;
 }
@@ -33,17 +41,21 @@ export function tryToParseCodeFromUrl() {
   return params.get("code");
 }
 
-export function tryReceiveDropboxToken() {
+export function tryReceiveDropboxToken(redirectUrl: string) {
   let code = tryToParseCodeFromUrl();
   if (code !== null) {
-    dbx.codeChallenge = sessionStorage.getItem("codeChallenge");
-    dbx.codeVerifier = sessionStorage.getItem("codeVerifier");
+    dbx.auth.codeChallenge = sessionStorage.getItem("codeChallenge");
+    dbx.auth.codeVerifier = sessionStorage.getItem("codeVerifier");
 
-    dbx
+    dbx.auth
       .getAccessTokenFromCode(redirectUrl, code)
       .then(function (token: any) {
-        console.log("Token Result:" + JSON.stringify(token));
-        dbx.setRefreshToken(token.refreshToken);
+        dbx.auth.setRefreshToken(token.result.refresh_token);
+        dbx.auth.setAccessToken(token.result.access_token);
+        dbx.auth.setAccessTokenExpiresAt(new Date(Date.now() + (token.result.expires_in * 1000)));
+
+        // TODO: Store these tokens somewhere
+
         dbx
           .usersGetCurrentAccount()
           .then(function (response: any) {

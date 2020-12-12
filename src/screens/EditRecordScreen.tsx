@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { useSnackbar } from "notistack";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect, useParams } from "react-router-dom";
 
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const useRecordSlot = (uid: string) =>
-  useSelector(useCallback(makeGetWeightLogRecordSlot(uid), [uid]));
+  useSelector(useMemo(() => makeGetWeightLogRecordSlot(uid), [uid]));
 
 export default function EditRecordScreen() {
   const { uid } = useParams<{ uid: string }>();
@@ -50,7 +50,7 @@ export default function EditRecordScreen() {
       setDeleted(true);
       enqueueSnackbar("Deleted", { variant: "success" });
     }
-  }, [slot]);
+  }, [slot, dispatch, enqueueSnackbar]);
 
   const handleSave = useCallback(() => {
     if (record && slot) {
@@ -58,7 +58,7 @@ export default function EditRecordScreen() {
       setSaved(true);
       enqueueSnackbar("Saved", { variant: "success" });
     }
-  }, [slot, record]);
+  }, [slot, record, dispatch, enqueueSnackbar]);
 
   if (saved || deleted) {
     return <Redirect to="/" />;

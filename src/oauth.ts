@@ -1,4 +1,4 @@
- // @ts-ignore
+// @ts-ignore
 import { Dropbox } from "dropbox/dist/Dropbox-sdk";
 
 let util = require("util");
@@ -6,20 +6,23 @@ util.TextEncoder = window.TextEncoder;
 // Import non-minified version of the Dropbox SDK and disable type checks on it
 // because type declarations are out of dat
 const dropboxClientId = process.env.REACT_APP_DROPBOX_CLIENT_ID;
-
-(window.crypto as any).randomBytes = require('randombytes');
-(window.crypto as any).createHash = require('create-hash');
+if (!window.crypto) {
+  // @ts-ignore
+  window.crypto = {};
+}
+(window.crypto as any).randomBytes = require("randombytes");
+(window.crypto as any).createHash = require("create-hash");
 
 const dbx = new Dropbox({
   clientId: dropboxClientId,
 }) as any;
 export function generateAuthorizationLink(redirectUrl: string) {
-  if(!dropboxClientId) {
-    console.error('process.env.REACT_APP_DROPBOX_CLIENT_ID is not defined')
-    return
+  if (!dropboxClientId) {
+    console.error("process.env.REACT_APP_DROPBOX_CLIENT_ID is not defined");
+    return;
   }
 
-  console.log(dbx)
+  console.log(dbx);
   let url = dbx.auth.getAuthenticationUrl(
     redirectUrl,
     undefined,
@@ -52,7 +55,9 @@ export function tryReceiveDropboxToken(redirectUrl: string) {
       .then(function (token: any) {
         dbx.auth.setRefreshToken(token.result.refresh_token);
         dbx.auth.setAccessToken(token.result.access_token);
-        dbx.auth.setAccessTokenExpiresAt(new Date(Date.now() + (token.result.expires_in * 1000)));
+        dbx.auth.setAccessTokenExpiresAt(
+          new Date(Date.now() + token.result.expires_in * 1000)
+        );
 
         // TODO: Store these tokens somewhere
 

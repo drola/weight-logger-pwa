@@ -21,6 +21,16 @@ Things I want to try:
 - Progressive Web Apps: let's see how far they can take us
 - Writing out the decision making process
 
+## Infrastructure
+
+- minikube, kubectl
+
+```sh
+snap install kubectl --classic
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+```
+
 ## TODO
 
 - Connection to Dropbox:

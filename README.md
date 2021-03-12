@@ -38,6 +38,7 @@ sudo install minikube-linux-amd64 /usr/local/bin/minikube
   - [ ] Store received tokens
   - [ ] If connected, indicate that in Settings
   - [ ] Add syncing
+- Pack as desktop app https://github.com/tauri-apps/tauri
 - <del>editing, deleting: load actual record based on the URL</del>
 - <del>Refactor: Do sorting on all displays/exports but not internally in reducers. This is to be able to refer records simply by their index - not needed anymore</del>
 - <del>complete CRUD screens and integrate w redux state</del>

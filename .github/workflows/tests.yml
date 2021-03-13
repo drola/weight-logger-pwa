@@ -24,5 +24,16 @@ jobs:
             ${{ runner.OS }}-
       - name: Install modules
         run: npm install
+      
+      - name: Run Trivy on node_modules
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'library'
+          severity: 'CRITICAL,HIGH'
+      
       - name: Run tests
         run: npm test

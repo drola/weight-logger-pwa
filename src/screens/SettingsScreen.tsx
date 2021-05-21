@@ -1,3 +1,4 @@
+import { Box, Chip } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -50,9 +51,20 @@ export default function SettingsScreen() {
           <br />
           <Card variant="outlined">
             <CardContent>
-              <Typography variant="h5" component="h2">
-                Dropbox
-              </Typography>
+              <Box
+                flexDirection="row"
+                display="flex"
+                justifyContent="space-between"
+              >
+                <Box>
+                  <Typography variant="h5" component="h2">
+                    Dropbox
+                  </Typography>
+                </Box>
+                <Box>
+                  <Chip color="secondary" label="Coming Soon" />
+                </Box>
+              </Box>
               <Typography variant="body1" component="p">
                 Use your Dropbox account to save and sync the log across
                 devices.

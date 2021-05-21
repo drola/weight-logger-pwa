@@ -8,7 +8,7 @@ import { SnackbarProvider } from "notistack";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { applyMiddleware, compose, createStore } from "redux";
 
 import App from "./App";
 import { generateAuthorizationLink, tryReceiveDropboxToken } from "./oauth";
@@ -16,10 +16,44 @@ import * as serviceWorker from "./serviceWorker";
 import rootReducer from "./state/rootReducer";
 import theme from "./theme";
 
+function persistStateToLocalStorage({ getState }: { getState: Function }) {
+  return (next: Function) => (action: any) => {
+    const newState = next(action);
+    console.log(getState());
+
+    window.localStorage.setItem(
+      "weight-logger-state",
+      JSON.stringify(getState())
+    );
+
+    return newState;
+  };
+}
+
+function loadStateFromLocalStorage() {
+  const v = window.localStorage.getItem("weight-logger-state");
+  if (v !== null) {
+    const parsed = JSON.parse(v);
+    return {
+      ...parsed,
+      weightLogRecords: parsed.weightLogRecords.map((r: any) => ({
+        ...r,
+        record: {
+          ...r.record,
+          datetime: new Date(r.record.datetime),
+        }
+      })),
+    };
+  }
+}
+
+const composeEnhancers =
+  (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+console.log(loadStateFromLocalStorage())
 const store = createStore(
   rootReducer,
-  (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
-    (window as any).__REDUX_DEVTOOLS_EXTENSION__()
+  loadStateFromLocalStorage(),
+  composeEnhancers(applyMiddleware(persistStateToLocalStorage))
 );
 
 ReactDOM.render(

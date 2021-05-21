@@ -39,7 +39,7 @@ sudo install minikube-linux-amd64 /usr/local/bin/minikube
   - [ ] If connected, indicate that in Settings
   - [ ] Add syncing
 - Pack as desktop app https://github.com/tauri-apps/tauri
-- New color scheme https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=B3E5FC&secondary.color=FFCC80&primary.text.color=455A64&secondary.text.color=546E7A
+- [x] New color scheme https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=0277BD&primary.text.color=ffffff&secondary.color=FB8C00&secondary.text.color=FAFAFA
 - Icons, favicon
 - <del>editing, deleting: load actual record based on the URL</del>
 - <del>Refactor: Do sorting on all displays/exports but not internally in reducers. This is to be able to refer records simply by their index - not needed anymore</del>

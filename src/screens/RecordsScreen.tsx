@@ -101,7 +101,7 @@ export default withRouter(function RecordsScreen(props) {
       }
       fastActionButton={
         <Link to="/add">
-          <Fab color="primary">
+          <Fab color="secondary">
             <AddIcon />
           </Fab>
         </Link>

@@ -16,6 +16,7 @@ if (!window.crypto) {
 const dbx = new Dropbox({
   clientId: dropboxClientId,
 }) as any;
+
 export function generateAuthorizationLink(redirectUrl: string) {
   if (!dropboxClientId) {
     console.error("process.env.REACT_APP_DROPBOX_CLIENT_ID is not defined");

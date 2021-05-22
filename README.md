@@ -44,9 +44,9 @@ Potential improvements:
 
 To improve:
 
-- buttons should have accessible names.
-- links should have discernable names
-- allow users to scale the app (meta tag - max-scale >= 5 or user-scalable="yes")
+- <del>buttons should have accessible names.</del>
+- <del>links should have discernable names</del>
+- <del>allow users to scale the app (meta tag - max-scale >= 5 or user-scalable="yes")</del>
 
 ## TODO
 

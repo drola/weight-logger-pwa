@@ -51,8 +51,8 @@ export default withRouter(function RecordsScreen(props) {
             <Typography variant="h6" className={classes.title}>
               Weight History
             </Typography>
-            <Link to="/settings" style={{ color: "inherit" }}>
-              <IconButton edge="end" color="inherit" aria-label="back">
+            <Link to="/settings" style={{ color: "inherit" }} aria-label="settings">
+              <IconButton edge="end" color="inherit" aria-label="settings">
                 <SettingsIcon />
               </IconButton>
             </Link>
@@ -98,8 +98,8 @@ export default withRouter(function RecordsScreen(props) {
         </Container>
       }
       fastActionButton={
-        <Link to="/add">
-          <Fab color="secondary">
+        <Link to="/add" aria-label="add a record to the weight log">
+          <Fab color="secondary" aria-label="add a record to the weight log">
             <AddIcon />
           </Fab>
         </Link>

@@ -81,7 +81,7 @@ export default function SettingsScreen() {
       appBarContents={
         <Container>
           <Toolbar>
-            <Link to="/" style={{ color: "inherit" }}>
+            <Link to="/" style={{ color: "inherit" }} aria-label="back">
               <IconButton edge="start" color="inherit" aria-label="back">
                 <ArrowBackIcon />
               </IconButton>
@@ -104,12 +104,14 @@ export default function SettingsScreen() {
             </DialogContent>
             <DialogActions>
               <Button
+                aria-label="cancel clearing the data"
                 onClick={handleClearDataConfirmationDialogClose}
                 color="primary"
               >
                 Cancel
               </Button>
               <Button
+                aria-label="confirm clearing the data"
                 onClick={handleClearDataConfirmed}
                 className={classes.redButton}
               >
@@ -140,7 +142,7 @@ export default function SettingsScreen() {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button color="primary" onClick={handleConnectToDropbox}>
+              <Button aria-label="connect to Dropbox" color="primary" onClick={handleConnectToDropbox}>
                 Connect to Dropbox
               </Button>
             </CardActions>
@@ -156,7 +158,7 @@ export default function SettingsScreen() {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button onClick={handleClearData} className={classes.redButton}>
+              <Button aria-label="clear all weight logger data" onClick={handleClearData} className={classes.redButton}>
                 Clear Data
               </Button>
             </CardActions>

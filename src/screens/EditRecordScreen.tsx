@@ -69,7 +69,7 @@ export default function EditRecordScreen() {
       appBarContents={
         <Container>
           <Toolbar>
-            <Link to="/" style={{ color: "inherit" }}>
+            <Link to="/" style={{ color: "inherit" }} aria-label="back">
               <IconButton edge="start" color="inherit" aria-label="back">
                 <ArrowBackIcon />
               </IconButton>
@@ -77,7 +77,7 @@ export default function EditRecordScreen() {
             <Typography variant="h6" className={classes.title}>
               Edit record
             </Typography>
-            <IconButton edge="end" color="inherit" onClick={handleDelete}>
+            <IconButton edge="end" color="inherit" onClick={handleDelete} aria-label="delete this record">
               <DeleteIcon />
             </IconButton>
           </Toolbar>
@@ -90,6 +90,7 @@ export default function EditRecordScreen() {
               <RecordForm record={record} onRecordChange={setRecord} />
               <Box my={2}>
                 <Button
+                  aria-label="save changes"
                   variant="contained"
                   color="secondary"
                   fullWidth

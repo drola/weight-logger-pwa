@@ -29,7 +29,7 @@ export default function AddRecord() {
       appBarContents={
         <Container>
           <Toolbar>
-            <Link to="/" style={{ color: "inherit" }}>
+            <Link to="/" style={{ color: "inherit" }} aria-label="back">
               <IconButton edge="start" color="inherit" aria-label="back">
                 <ArrowBackIcon />
               </IconButton>
@@ -43,6 +43,7 @@ export default function AddRecord() {
           <RecordForm record={record} onRecordChange={setRecord} />
           <Box my={2}>
             <Button
+              aria-label="append weight to the log"
               variant="contained"
               color="secondary"
               fullWidth

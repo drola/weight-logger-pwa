@@ -1,9 +1,12 @@
-import React, { RefObject } from "react";
-import { Card, makeStyles, CardContent, useTheme } from "@material-ui/core";
-import useResizeObserver from "use-resize-observer/polyfilled";
-import { WeightLogRecord } from "../WeightLogRecord";
-import { weightLogDataToXY } from "../charts/weightLogDataToXY";
-import { xyToSvgPathData } from "../charts/xyToSvgPathData";
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import React, { RefObject } from 'react';
+import useResizeObserver from 'use-resize-observer/polyfilled';
+
+import { weightLogDataToXY } from '../charts/weightLogDataToXY';
+import { xyToSvgPathData } from '../charts/xyToSvgPathData';
+import { WeightLogRecord } from '../WeightLogRecord';
 
 const useStyles = makeStyles((theme) => ({
   root: {

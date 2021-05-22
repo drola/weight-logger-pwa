@@ -33,6 +33,8 @@ sudo install minikube-linux-amd64 /usr/local/bin/minikube
 
 ## TODO
 
+- [ ] Deploy (CI, CD) to AWS Amplify
+
 - [x] Add "Coming Soon" badge to the Dropbox Settings screen
 - [x] Persist weight values to the Local Storage
 - [x] Add "Clear data" button to the settings

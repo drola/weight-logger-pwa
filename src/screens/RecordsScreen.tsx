@@ -1,29 +1,27 @@
-import { makeStyles } from "@material-ui/core";
-import Container from "@material-ui/core/Container";
-import Fab from "@material-ui/core/Fab";
-import IconButton from "@material-ui/core/IconButton";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import AddIcon from "@material-ui/icons/Add";
-import HomeIcon from "@material-ui/icons/Home";
-import SettingsIcon from "@material-ui/icons/Settings";
-import { format } from "date-fns";
-import React from "react";
-import { useSelector } from "react-redux";
-import { Link, withRouter } from "react-router-dom";
-import Chart from "../components/Chart";
-import NoRecords from "../components/NoRecords";
-import {
-  selectWeightLogRecords,
-  WeightLogRecordSlot,
-} from "../state/weightLogRecords";
-import Screen from "./Screen";
+import Container from '@material-ui/core/Container';
+import Fab from '@material-ui/core/Fab';
+import IconButton from '@material-ui/core/IconButton';
+import { makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import AddIcon from '@material-ui/icons/Add';
+import HomeIcon from '@material-ui/icons/Home';
+import SettingsIcon from '@material-ui/icons/Settings';
+import { format } from 'date-fns';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
+
+import Chart from '../components/Chart';
+import NoRecords from '../components/NoRecords';
+import { selectWeightLogRecords, WeightLogRecordSlot } from '../state/weightLogRecords';
+import Screen from './Screen';
 
 const useStyles = makeStyles((theme) => ({
   title: {

@@ -17,11 +17,11 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
-import {
+/*import {
   generateAuthorizationLink,
   tryReceiveDropboxToken,
   tryToParseCodeFromUrl,
-} from "../oauth";
+} from "../oauth";*/
 import { clearDataAction as clearWeightLogRecordsDataAction } from "../state/weightLogRecords";
 import { clearDataAction as clearStorageConnectionsDataAction } from "../state/storageConnections";
 
@@ -38,17 +38,17 @@ export default function SettingsScreen() {
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
 
-  useEffect(() => {
-    const code = tryToParseCodeFromUrl();
-    if (code) {
-      tryReceiveDropboxToken("http://localhost:3000/settings");
-    }
-  }, []);
+  // useEffect(() => {
+  //   const code = tryToParseCodeFromUrl();
+  //   if (code) {
+  //     tryReceiveDropboxToken("http://localhost:3000/settings");
+  //   }
+  // }, []);
 
   const handleConnectToDropbox = useCallback(() => {
-    window.location.href = generateAuthorizationLink(
-      "http://localhost:3000/settings"
-    );
+    // window.location.href = generateAuthorizationLink(
+    //   "http://localhost:3000/settings"
+    // );
   }, []);
 
 

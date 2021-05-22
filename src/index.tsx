@@ -3,7 +3,7 @@ import "./index.css";
 import DateFnsUtils from "@date-io/date-fns";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/core/styles";
-import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers/MuiPickersUtilsProvider";
 import { SnackbarProvider } from "notistack";
 import React from "react";
 import ReactDOM from "react-dom";
@@ -11,7 +11,6 @@ import { Provider } from "react-redux";
 import { applyMiddleware, compose, createStore } from "redux";
 
 import App from "./App";
-import { generateAuthorizationLink, tryReceiveDropboxToken } from "./oauth";
 import * as serviceWorker from "./serviceWorker";
 import rootReducer from "./state/rootReducer";
 import theme from "./theme";
@@ -81,8 +80,3 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
-
-Object.assign(window, {
-  generateAuthorizationLink,
-  tryReceiveDropboxToken,
-});

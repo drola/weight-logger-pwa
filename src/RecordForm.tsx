@@ -1,6 +1,6 @@
 import InputAdornment from "@material-ui/core/InputAdornment";
 import TextField from "@material-ui/core/TextField";
-import { DateTimePicker } from "@material-ui/pickers";
+import { DateTimePicker } from "@material-ui/pickers/DateTimePicker";
 import React, { useState } from "react";
 
 import { WeightLogRecord } from "./WeightLogRecord";

@@ -77,6 +77,9 @@ const weightLogRecords = createSlice({
       state[idx].record = action.payload.updated;
       sortWeightLogRecords(state);
     },
+    clearData: (state: WeightLogRecordSlot[], action: {payload: {}}) => {
+      return [];
+    }
   },
 });
 
@@ -93,5 +96,6 @@ export const makeGetWeightLogRecordSlot = (uid: string) => {
 export const appendAction = weightLogRecords.actions.append;
 export const deleteAction = weightLogRecords.actions.delete;
 export const updateAction = weightLogRecords.actions.update;
+export const clearDataAction = weightLogRecords.actions.clearData;
 
 export default weightLogRecords.reducer;

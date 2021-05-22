@@ -35,7 +35,7 @@ sudo install minikube-linux-amd64 /usr/local/bin/minikube
 
 - [x] Add "Coming Soon" badge to the Dropbox Settings screen
 - [x] Persist weight values to the Local Storage
-- [ ] Add "Clear data" button to the settings
+- [x] Add "Clear data" button to the settings
 - [ ] Add "Save as CSV" button
 
 - Connection to Dropbox:

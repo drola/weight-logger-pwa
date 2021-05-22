@@ -4,7 +4,7 @@
 
 <p align="center">
 <a href="./img/screenshot.png"><img alt="Weight Logger PWA Screenshot" src="./img/screenshot_scaled.png"/></a><br/>
-Body Weight Logger with minimalistic UI
+<a href="https://weight-logger.catdad.net/" title="Open Weight Logger PWA">Body Weight Logger with minimalistic UI</a>
 </p>
 
 Reading is great for learning, but it can only take you so far. This app is a place to put things into practice.

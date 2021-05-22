@@ -31,6 +31,23 @@ curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-
 sudo install minikube-linux-amd64 /usr/local/bin/minikube
 ```
 
+## Lighthouse report
+
+### Performance - score 99/100
+
+Potential improvements:
+
+- lazy load everything related to datetime-picker (~70kB)
+- lazy load Dropbox stuff
+
+### Accessibility - score 73/100
+
+To improve:
+
+- buttons should have accessible names.
+- links should have discernable names
+- allow users to scale the app (meta tag - max-scale >= 5 or user-scalable="yes")
+
 ## TODO
 
 - [ ] Deploy (CI, CD) to AWS Amplify
@@ -45,6 +62,7 @@ sudo install minikube-linux-amd64 /usr/local/bin/minikube
   - [ ] Store received tokens
   - [ ] If connected, indicate that in Settings
   - [ ] Add syncing
+- <del>Generate favicon https://favicon.io/favicon-generator/</de;>
 - Pack as desktop app https://github.com/tauri-apps/tauri
 - [x] New color scheme https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=0277BD&primary.text.color=ffffff&secondary.color=FB8C00&secondary.text.color=FAFAFA
 - Icons, favicon

@@ -14,19 +14,21 @@ import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import React, { useCallback, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 /*import {
   generateAuthorizationLink,
   tryReceiveDropboxToken,
   tryToParseCodeFromUrl,
 } from "../oauth";*/
-import { clearDataAction as clearWeightLogRecordsDataAction } from "../state/weightLogRecords";
+import { clearDataAction as clearWeightLogRecordsDataAction, selectWeightLogRecords } from "../state/weightLogRecords";
 import { clearDataAction as clearStorageConnectionsDataAction } from "../state/storageConnections";
 
 import Screen from "./Screen";
 import { useSnackbar } from "notistack";
+import FileSaver from "file-saver";
+import { serializeWeightLog } from "../weightLogDataFormat/serializer";
 
 const useStyles = makeStyles({
   redButton: {
@@ -45,35 +47,42 @@ export default function SettingsScreen() {
   //   }
   // }, []);
 
-  const handleConnectToDropbox = useCallback(() => {
+  const handleConnectToDropbox = () => {
     // window.location.href = generateAuthorizationLink(
     //   "http://localhost:3000/settings"
     // );
-  }, []);
+  };
 
+  const weightLogRecords = useSelector(selectWeightLogRecords)
+
+  const handleDownloadDataAsCSV = () => {
+    const blob = new Blob([serializeWeightLog(weightLogRecords.map(slot => slot.record))], {
+      type: "text/csv;charset=utf-8",
+    });
+    FileSaver.saveAs(blob, "weight_log.csv");
+  };
 
   const [clearedData, setClearedData] = useState(false);
   const [clearDataConfirmationDialogOpen, setClearDataConfirmationDialogOpen] =
     useState(false);
-  const handleClearDataConfirmationDialogClose = useCallback(() => {
+  const handleClearDataConfirmationDialogClose = () => {
     setClearDataConfirmationDialogOpen(false);
-  }, []);
-  const handleClearDataConfirmed = useCallback(() => {
+  };
+  const handleClearDataConfirmed = () => {
     dispatch(clearWeightLogRecordsDataAction({}));
     dispatch(clearStorageConnectionsDataAction({}));
     setClearDataConfirmationDialogOpen(false);
     enqueueSnackbar("Data Cleared", { variant: "success" });
     setClearedData(true);
-  }, [dispatch, enqueueSnackbar]);
-  const handleClearData = useCallback(() => {
+  };
+  const handleClearData = () => {
     setClearDataConfirmationDialogOpen(true);
-  }, []);
+  };
 
   const classes = useStyles();
 
-
-  if(clearedData) {
-    return <Redirect to="/" />
+  if (clearedData) {
+    return <Redirect to="/" />;
   }
 
   return (
@@ -142,8 +151,32 @@ export default function SettingsScreen() {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button aria-label="connect to Dropbox" color="primary" onClick={handleConnectToDropbox}>
+              <Button
+                aria-label="connect to Dropbox"
+                color="primary"
+                onClick={handleConnectToDropbox}
+              >
                 Connect to Dropbox
+              </Button>
+            </CardActions>
+          </Card>
+          <br />
+          <Card variant="outlined">
+            <CardContent>
+              <Typography variant="h5" component="h2">
+                Download data
+              </Typography>
+              <Typography variant="body1" component="p">
+                Download all your data as a CSV file
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button
+                aria-label="Download data as CSV"
+                color="primary"
+                onClick={handleDownloadDataAsCSV}
+              >
+                Download CSV
               </Button>
             </CardActions>
           </Card>
@@ -158,7 +191,11 @@ export default function SettingsScreen() {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button aria-label="clear all weight logger data" onClick={handleClearData} className={classes.redButton}>
+              <Button
+                aria-label="clear all weight logger data"
+                onClick={handleClearData}
+                className={classes.redButton}
+              >
                 Clear Data
               </Button>
             </CardActions>

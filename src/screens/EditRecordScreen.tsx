@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { useSnackbar } from "notistack";
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect, useParams } from "react-router-dom";
 
@@ -44,21 +44,21 @@ export default function EditRecordScreen() {
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  const handleDelete = useCallback(() => {
+  const handleDelete = () => {
     if (slot) {
       dispatch(deleteAction(slot));
       setDeleted(true);
       enqueueSnackbar("Deleted", { variant: "success" });
     }
-  }, [slot, dispatch, enqueueSnackbar]);
+  };
 
-  const handleSave = useCallback(() => {
+  const handleSave = () => {
     if (record && slot) {
       dispatch(updateAction({ slot, updated: record }));
       setSaved(true);
       enqueueSnackbar("Saved", { variant: "success" });
     }
-  }, [slot, record, dispatch, enqueueSnackbar]);
+  };
 
   if (saved || deleted) {
     return <Redirect to="/" />;
@@ -77,7 +77,12 @@ export default function EditRecordScreen() {
             <Typography variant="h6" className={classes.title}>
               Edit record
             </Typography>
-            <IconButton edge="end" color="inherit" onClick={handleDelete} aria-label="delete this record">
+            <IconButton
+              edge="end"
+              color="inherit"
+              onClick={handleDelete}
+              aria-label="delete this record"
+            >
               <DeleteIcon />
             </IconButton>
           </Toolbar>

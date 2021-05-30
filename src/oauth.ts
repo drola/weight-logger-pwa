@@ -10,8 +10,8 @@ if (!window.crypto) {
   // @ts-ignore
   window.crypto = {};
 }
-(window.crypto as any).randomBytes = require("randombytes");
-(window.crypto as any).createHash = require("create-hash");
+//(window.crypto as any).randomBytes = require("randombytes");
+//(window.crypto as any).createHash = require("create-hash");
 
 const dbx = new Dropbox({
   clientId: dropboxClientId,

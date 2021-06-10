@@ -1,6 +1,6 @@
 <img alt="Tests Results Badge" src="https://github.com/drola/weight-logger-pwa/workflows/Tests/badge.svg" align="right"/>
 
-# weight-logger-pwa
+# Weight Logger
 
 <p align="center">
 <a href="./img/screenshot.png"><img alt="Weight Logger PWA Screenshot" src="./img/screenshot_scaled.png"/></a>
@@ -8,6 +8,23 @@
 <br/>
 <a href="https://weight-logger.catdad.net/" title="Open Weight Logger PWA">Body Weight Logger with minimalistic UI</a>
 </p>
+
+Tracking your body weight is an essential tool for anyone who wants to maintain,
+lose or gain a few kilos. Observe, decide, act.
+By logging numbers from the scale you'll be able to distinguish minor fluctuations
+from trends. This will give you ample opportunity to course-correct or keep going.
+
+_Weight Logger_ will be always with you in your pocket.
+
+## Features
+
+- Simple, attractive and mobile-optimized design
+- You own the data. Everything stays on your device by default.
+- Export data as a CSV file
+- **Coming soon** backup to OwnCloud, Dropbox or Office 365.
+- **Coming soon** launch the app without an internet connection
+
+---
 
 Reading is great for learning, but it can only take you so far. This app is a place to put things into practice.
 

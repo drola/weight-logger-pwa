@@ -6,7 +6,7 @@
 <a href="./img/screenshot.png"><img alt="Weight Logger PWA Screenshot" src="./img/screenshot_scaled.png"/></a>
 <a href="./img/screenshot_settings.png"><img alt="Weight Logger Settings Screenshot" src="./img/screenshot_settings_scaled.png"/></a>
 <br/>
-<a href="https://weight-logger.catdad.net/" title="Open Weight Logger PWA">Body Weight Logger with minimalistic UI</a>
+<a href="https://weight-logger.catdad.net/" title="Open Weight Logger PWA">Body Weight Logger. Simple and private.</a>
 </p>
 
 Tracking your body weight is an essential tool for anyone who wants to maintain,
@@ -69,13 +69,12 @@ To improve:
 
 ## TODO
 
-- [ ] Deploy (CI, CD) to AWS Amplify
-
+- [x] Deploy (CI, CD) to AWS Amplify
 - [x] Add "Coming Soon" badge to the Dropbox Settings screen
 - [x] Persist weight values to the Local Storage
 - [x] Add "Clear data" button to the settings
-- [ ] Add "Save as CSV" button
-
+- [x] Add "Save as CSV" button
+- [ ] Cache with service worker - make it work offline
 - Connection to Dropbox:
   - [x] Trigger and complete Dropbox OAuth flow
   - [ ] Store received tokens

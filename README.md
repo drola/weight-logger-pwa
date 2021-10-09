@@ -23,6 +23,7 @@ _Weight Logger_ will be always with you in your pocket.
 - Simple, attractive and mobile-optimized design
 - You own the data. Everything stays on your device by default.
 - Export data as a CSV file
+- Import data from a CSV file
 - **Coming soon** backup to OwnCloud, Dropbox or Office 365.
 - **Coming soon** launch the app without an internet connection
 
@@ -71,6 +72,8 @@ To improve:
 
 ## TODO
 
+- [ ] Test for clearData and importData actions in the Redux reducer
+- [ ] Display chart for last 14 days / last month / last 3 months
 - [x] Deploy (CI, CD) to AWS Amplify
 - [x] Add "Coming Soon" badge to the Dropbox Settings screen
 - [x] Persist weight values to the Local Storage

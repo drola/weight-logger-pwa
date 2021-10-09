@@ -14,7 +14,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 /*import {
@@ -22,13 +22,18 @@ import { Link, Redirect } from "react-router-dom";
   tryReceiveDropboxToken,
   tryToParseCodeFromUrl,
 } from "../oauth";*/
-import { clearDataAction as clearWeightLogRecordsDataAction, selectWeightLogRecords } from "../state/weightLogRecords";
+import {
+  clearDataAction as clearWeightLogRecordsDataAction,
+  importDataAction,
+  selectWeightLogRecords,
+} from "../state/weightLogRecords";
 import { clearDataAction as clearStorageConnectionsDataAction } from "../state/storageConnections";
 
 import Screen from "./Screen";
 import { useSnackbar } from "notistack";
 import FileSaver from "file-saver";
 import { serializeWeightLog } from "../weightLogDataFormat/serializer";
+import { parseWeightLog } from "../weightLogDataFormat/parser";
 
 const useStyles = makeStyles({
   redButton: {
@@ -53,16 +58,20 @@ export default function SettingsScreen() {
     // );
   };
 
-  const weightLogRecords = useSelector(selectWeightLogRecords)
+  const weightLogRecords = useSelector(selectWeightLogRecords);
 
   const handleDownloadDataAsCSV = () => {
-    const blob = new Blob([serializeWeightLog(weightLogRecords.map(slot => slot.record))], {
-      type: "text/csv;charset=utf-8",
-    });
+    const blob = new Blob(
+      [serializeWeightLog(weightLogRecords.map((slot) => slot.record))],
+      {
+        type: "text/csv;charset=utf-8",
+      }
+    );
     FileSaver.saveAs(blob, "weight_log.csv");
   };
 
   const [clearedData, setClearedData] = useState(false);
+  const [importedData, setImportedData] = useState(false);
   const [clearDataConfirmationDialogOpen, setClearDataConfirmationDialogOpen] =
     useState(false);
   const handleClearDataConfirmationDialogClose = () => {
@@ -81,7 +90,36 @@ export default function SettingsScreen() {
 
   const classes = useStyles();
 
-  if (clearedData) {
+  const importCSVInputFile = useRef<HTMLInputElement>(null);
+  const handleImportCSVClicked = () => {
+    if (!importCSVInputFile.current) {
+      return;
+    }
+    importCSVInputFile.current.click();
+  };
+  const handleImportCSVFileInputChange = () => {
+    if (!importCSVInputFile.current || !importCSVInputFile.current.files) {
+      return;
+    }
+    for (const file of importCSVInputFile.current.files) {
+      file.text().then((text) => {
+        const records = parseWeightLog(text);
+        if (records.length) {
+          dispatch(importDataAction({ records }));
+          enqueueSnackbar(`Imported ${records.length} log entries`, {
+            variant: "success",
+          });
+          setImportedData(true);
+        } else {
+          enqueueSnackbar(`No records found in given file`, {
+            variant: "warning",
+          });
+        }
+      });
+    }
+  };
+
+  if (clearedData || importedData) {
     return <Redirect to="/" />;
   }
 
@@ -178,6 +216,32 @@ export default function SettingsScreen() {
               >
                 Download CSV
               </Button>
+            </CardActions>
+          </Card>
+          <br />
+          <Card variant="outlined">
+            <CardContent>
+              <Typography variant="h5" component="h2">
+                Import data
+              </Typography>
+              <Typography variant="body1" component="p">
+                Import data from a CSV file
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button
+                aria-label="Import data from a CSV file"
+                color="primary"
+                onClick={handleImportCSVClicked}
+              >
+                Import CSV
+              </Button>
+              <input
+                type="file"
+                style={{ display: "none" }}
+                ref={importCSVInputFile}
+                onChange={handleImportCSVFileInputChange}
+              />
             </CardActions>
           </Card>
           <br />

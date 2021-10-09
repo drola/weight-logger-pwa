@@ -77,9 +77,18 @@ const weightLogRecords = createSlice({
       state[idx].record = action.payload.updated;
       sortWeightLogRecords(state);
     },
-    clearData: (state: WeightLogRecordSlot[], action: {payload: {}}) => {
+    clearData: (state: WeightLogRecordSlot[], action: { payload: {} }) => {
       return [];
-    }
+    },
+    importData: (
+      state: WeightLogRecordSlot[],
+      action: { payload: { records: WeightLogRecord[] } }
+    ) => {
+      return action.payload.records.reduce(
+        (state, wr) => [...state, wrapWeightLogRecord(wr, state)],
+        [] as WeightLogRecordSlot[]
+      );
+    },
   },
 });
 
@@ -97,5 +106,6 @@ export const appendAction = weightLogRecords.actions.append;
 export const deleteAction = weightLogRecords.actions.delete;
 export const updateAction = weightLogRecords.actions.update;
 export const clearDataAction = weightLogRecords.actions.clearData;
+export const importDataAction = weightLogRecords.actions.importData;
 
 export default weightLogRecords.reducer;

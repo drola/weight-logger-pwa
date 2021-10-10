@@ -1,9 +1,8 @@
 import "./index.css";
 
-import DateFnsUtils from "@date-io/date-fns";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import { ThemeProvider } from "@material-ui/core/styles";
-import { MuiPickersUtilsProvider } from "@material-ui/pickers/MuiPickersUtilsProvider";
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider, Theme, StyledEngineProvider } from "@mui/material/styles";
 import { SnackbarProvider } from "notistack";
 import React from "react";
 import ReactDOM from "react-dom";
@@ -14,6 +13,14 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import rootReducer from "./state/rootReducer";
 import theme from "./theme";
+import { LocalizationProvider } from "@mui/lab";
+
+
+declare module '@mui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
+
 
 function persistStateToLocalStorage({ getState }: { getState: Function }) {
   return (next: Function) => (action: any) => {
@@ -57,21 +64,23 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <ThemeProvider theme={theme}>
-      <SnackbarProvider
-        maxSnack={2}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-        autoHideDuration={2000}
-      >
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <CssBaseline />
-          <App />
-        </MuiPickersUtilsProvider>
-      </SnackbarProvider>
-    </ThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <SnackbarProvider
+          maxSnack={2}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+          autoHideDuration={2000}
+        >
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <CssBaseline />
+            <App />
+          </LocalizationProvider>
+        </SnackbarProvider>
+      </ThemeProvider>
+    </StyledEngineProvider>
   </Provider>,
   document.getElementById("root")
 );

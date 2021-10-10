@@ -1,7 +1,7 @@
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createTheme, adaptV4Theme } from "@mui/material/styles";
 
 // A custom theme for this app
-const theme = createMuiTheme({
+const theme = createTheme(adaptV4Theme({
   palette: {
     primary: {
       main: "#0277bd",
@@ -12,6 +12,6 @@ const theme = createMuiTheme({
       contrastText: "#ffffff",
     },
   },
-});
+}));
 
 export default theme;

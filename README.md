@@ -73,7 +73,8 @@ To improve:
 ## TODO
 
 - [ ] Test for clearData and importData actions in the Redux reducer
-- [ ] Display chart for last 14 days / last month / last 3 months
+- [ ] Add vertical scale to the chart
+- [x] Display chart for last 30 days / all time
 - [x] Deploy (CI, CD) to AWS Amplify
 - [x] Add "Coming Soon" badge to the Dropbox Settings screen
 - [x] Persist weight values to the Local Storage

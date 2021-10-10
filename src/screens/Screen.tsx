@@ -1,6 +1,6 @@
-import AppBar from "@material-ui/core/AppBar";
-import Grid from "@material-ui/core/Grid";
-import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@mui/material/AppBar";
+import Grid from "@mui/material/Grid";
+import makeStyles from '@mui/styles/makeStyles';
 import React from "react";
 
 const useStyle = makeStyles((theme) => ({

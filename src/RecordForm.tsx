@@ -1,6 +1,6 @@
-import InputAdornment from "@material-ui/core/InputAdornment";
-import TextField from "@material-ui/core/TextField";
-import { DateTimePicker } from "@material-ui/pickers/DateTimePicker";
+import DateTimePicker from "@mui/lab/DateTimePicker";
+import InputAdornment from "@mui/material/InputAdornment";
+import TextField from "@mui/material/TextField";
 import React, { useState } from "react";
 
 import { WeightLogRecord } from "./WeightLogRecord";
@@ -29,16 +29,14 @@ export default function RecordForm(props: {
       />
 
       <DateTimePicker
-        autoOk
         ampm={false}
         disableFuture
         value={record.datetime}
         onChange={(e) =>
-          onRecordChange({ ...record, datetime: e ?? new Date() })
+          onRecordChange({ ...record, datetime: e as Date ?? new Date() })
         }
         label="Date / time"
-        fullWidth
-        margin="normal"
+        renderInput={(params) => <TextField fullWidth {...params} />}
       />
     </div>
   );

@@ -1,10 +1,10 @@
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
-import Container from "@material-ui/core/Container";
-import IconButton from "@material-ui/core/IconButton";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import IconButton from "@mui/material/IconButton";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useSnackbar } from "notistack";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -30,7 +30,7 @@ export default function AddRecord() {
         <Container>
           <Toolbar>
             <Link to="/" style={{ color: "inherit" }} aria-label="back">
-              <IconButton edge="start" color="inherit" aria-label="back">
+              <IconButton edge="start" color="inherit" aria-label="back" size="large">
                 <ArrowBackIcon />
               </IconButton>
             </Link>

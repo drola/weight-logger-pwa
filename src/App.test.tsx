@@ -4,6 +4,8 @@ import App from "./App";
 import { createStore } from "redux";
 import rootReducer from "./state/rootReducer";
 import { Provider } from "react-redux";
+import { ThemeProvider } from "@mui/material";
+import theme from "./theme";
 
 test("renders list of records", () => {
   const store = createStore(
@@ -13,7 +15,9 @@ test("renders list of records", () => {
   );
   const { getByText } = render(
     <Provider store={store}>
-      <App />
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
     </Provider>
   );
   const headingElement = getByText(/Weight history/i);

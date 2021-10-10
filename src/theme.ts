@@ -1,7 +1,7 @@
-import { createTheme, adaptV4Theme } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 
 // A custom theme for this app
-const theme = createTheme(adaptV4Theme({
+const theme = createTheme({
   palette: {
     primary: {
       main: "#0277bd",
@@ -12,6 +12,6 @@ const theme = createTheme(adaptV4Theme({
       contrastText: "#ffffff",
     },
   },
-}));
+});
 
 export default theme;

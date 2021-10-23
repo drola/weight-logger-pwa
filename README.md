@@ -72,8 +72,8 @@ To improve:
 
 ## TODO
 
-- [ ] Test for clearData and importData actions in the Redux reducer
 - [ ] Add vertical scale to the chart
+- [x] Test for clearData and importData actions in the Redux reducer
 - [x] Display chart for last 30 days / all time
 - [x] Deploy (CI, CD) to AWS Amplify
 - [x] Add "Coming Soon" badge to the Dropbox Settings screen

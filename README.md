@@ -25,7 +25,7 @@ _Weight Logger_ will be always with you in your pocket.
 - Export data as a CSV file
 - Import data from a CSV file
 - **Coming soon** backup to OwnCloud, Dropbox or Office 365.
-- **Coming soon** launch the app without an internet connection
+- Works without an internet connection
 
 ---
 
@@ -73,6 +73,7 @@ To improve:
 ## TODO
 
 - [ ] Add vertical scale to the chart
+- [x] Enable offline mode
 - [x] Test for clearData and importData actions in the Redux reducer
 - [x] Display chart for last 30 days / all time
 - [x] Deploy (CI, CD) to AWS Amplify

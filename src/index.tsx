@@ -1,8 +1,12 @@
 import "./index.css";
 
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import CssBaseline from "@mui/material/CssBaseline";
-import { ThemeProvider, Theme, StyledEngineProvider } from "@mui/material/styles";
+import {
+  ThemeProvider,
+  Theme,
+  StyledEngineProvider,
+} from "@mui/material/styles";
 import { SnackbarProvider } from "notistack";
 import React from "react";
 import ReactDOM from "react-dom";
@@ -10,22 +14,19 @@ import { Provider } from "react-redux";
 import { applyMiddleware, compose, createStore } from "redux";
 
 import App from "./App";
-import * as serviceWorker from "./serviceWorker";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import rootReducer from "./state/rootReducer";
 import theme from "./theme";
 import { LocalizationProvider } from "@mui/lab";
 
-
-declare module '@mui/styles/defaultTheme' {
+declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface DefaultTheme extends Theme {}
 }
 
-
 function persistStateToLocalStorage({ getState }: { getState: Function }) {
   return (next: Function) => (action: any) => {
     const newState = next(action);
-    console.log(getState());
 
     window.localStorage.setItem(
       "weight-logger-state",
@@ -47,7 +48,7 @@ function loadStateFromLocalStorage() {
         record: {
           ...r.record,
           datetime: new Date(r.record.datetime),
-        }
+        },
       })),
     };
   }
@@ -55,7 +56,7 @@ function loadStateFromLocalStorage() {
 
 const composeEnhancers =
   (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-console.log(loadStateFromLocalStorage())
+
 const store = createStore(
   rootReducer,
   loadStateFromLocalStorage(),
@@ -88,4 +89,4 @@ ReactDOM.render(
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+serviceWorkerRegistration.register();

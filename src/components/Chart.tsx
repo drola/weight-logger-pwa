@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
   svg: { width: "100%", flex: 1 },
   timeRangeButtonGroup: {
-    justifyContent: "end",
+    justifyContent: "flex-end",
   },
 }));
 export default function Chart(props: { data: Array<WeightLogRecord> }) {

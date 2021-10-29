@@ -1,23 +1,21 @@
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import { useTheme } from "@mui/material/styles";
-import ToggleButton from "@mui/material/ToggleButton";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import makeStyles from "@mui/styles/makeStyles";
-import { zip } from "d3-array";
-import { axisBottom, axisLeft } from "d3-axis";
-import { scaleLinear, scaleTime } from "d3-scale";
-import { select } from "d3-selection";
-import isAfter from "date-fns/isAfter";
-import max from "date-fns/max";
-import sub from "date-fns/sub";
-import React, { RefObject, useEffect, useRef, useState } from "react";
-import useResizeObserver from "use-resize-observer/polyfilled";
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import { useTheme } from '@mui/material/styles';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import makeStyles from '@mui/styles/makeStyles';
+import { zip } from 'd3-array';
+import { scaleLinear, scaleTime } from 'd3-scale';
+import isAfter from 'date-fns/isAfter';
+import max from 'date-fns/max';
+import sub from 'date-fns/sub';
+import React, { RefObject, useState } from 'react';
+import useResizeObserver from 'use-resize-observer/polyfilled';
 
-import { dateRange } from "../charts/dateRange";
-import { weightsRange } from "../charts/weightsRange";
-import { xyToSvgPathData } from "../charts/xyToSvgPathData";
-import { WeightLogRecord } from "../WeightLogRecord";
+import { dateRange } from '../charts/dateRange';
+import { weightsRange } from '../charts/weightsRange';
+import { xyToSvgPathData } from '../charts/xyToSvgPathData';
+import { WeightLogRecord } from '../WeightLogRecord';
 
 enum TimeRange {
   ALL = "all",
@@ -61,18 +59,13 @@ export default function Chart(props: { data: Array<WeightLogRecord> }) {
   const theme = useTheme();
 
   const { ref, width = 300, height = 100 } = useResizeObserver();
-  const bottomAxisRef = useRef<SVGGElement>();
-  const leftAxisRef = useRef<SVGGElement>();
   const [timeRange, setTimeRange] = useState(TimeRange.ALL);
 
-  const showXScale = false;
-  const showYScale = false;
-
   const padding = {
-    left: showYScale ? 30 : 0,
+    left: 30,
     right: 0,
     top: 10,
-    bottom: showXScale ? 55 : 0,
+    bottom: 0,
   };
 
   const data = filterByTimeRange(props.data, timeRange);
@@ -90,25 +83,7 @@ export default function Chart(props: { data: Array<WeightLogRecord> }) {
   const ys = weights.map(yScale);
   let d = xyToSvgPathData(zip(xs, ys) as [number, number][]);
 
-  useEffect(() => {
-    if (showYScale) {
-      const aLeft = axisLeft(yScale).ticks(5);
-      aLeft(select(leftAxisRef.current as SVGGElement).html(""));
-    }
-
-    if (showXScale) {
-      const aBottom = axisBottom(xScale).ticks(8);
-      select(bottomAxisRef.current as SVGGElement)
-        .html("")
-        .call(aBottom)
-        .selectAll("text")
-        .style("text-anchor", "end")
-        .attr("transform", "translate(3 12) rotate(-45)")
-        .attr("y", 0)
-        .attr("dy", 0)
-        .attr("dx", 0);
-    }
-  });
+  const yTicks = yScale.ticks(5);
 
   return (
     <Card variant="outlined" className={classes.root}>
@@ -130,14 +105,32 @@ export default function Chart(props: { data: Array<WeightLogRecord> }) {
           height="100%"
           className={classes.svg}
         >
-          <g
-            ref={bottomAxisRef as unknown as RefObject<SVGGElement>}
-            transform={`translate(0 ${height - padding.bottom})`}
-          ></g>
-          <g
-            ref={leftAxisRef as unknown as RefObject<SVGGElement>}
-            transform={`translate(${padding.left} 0)`}
-          ></g>
+          <g>
+            {yTicks.map((y) => (
+              <line
+                key={y}
+                x1="0"
+                x2={width - padding.right}
+                y1={yScale(y)}
+                y2={yScale(y)}
+                strokeWidth="1"
+                stroke={theme.palette.grey[300]}
+              />
+            ))}
+          </g>
+          <g>
+            {yTicks.map((y) => (
+              <text
+                key={y}
+                x="0"
+                y={yScale(y) - 3}
+                style={{ ...theme.typography.body1, fontSize: "0.7rem" }}
+                fill={theme.palette.grey[500]}
+              >
+                {y.toFixed(1)}
+              </text>
+            ))}
+          </g>
           <path
             d={d}
             stroke={theme.palette.primary.main}

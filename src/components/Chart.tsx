@@ -1,21 +1,21 @@
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import { useTheme } from '@mui/material/styles';
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import makeStyles from '@mui/styles/makeStyles';
-import { zip } from 'd3-array';
-import { scaleLinear, scaleTime } from 'd3-scale';
-import isAfter from 'date-fns/isAfter';
-import max from 'date-fns/max';
-import sub from 'date-fns/sub';
-import React, { RefObject, useState } from 'react';
-import useResizeObserver from 'use-resize-observer/polyfilled';
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import { useTheme } from "@mui/material/styles";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import makeStyles from "@mui/styles/makeStyles";
+import { zip } from "d3-array";
+import { scaleLinear, scaleTime } from "d3-scale";
+import isAfter from "date-fns/isAfter";
+import max from "date-fns/max";
+import sub from "date-fns/sub";
+import React, { RefObject, useState } from "react";
+import useResizeObserver from "use-resize-observer/polyfilled";
 
-import { dateRange } from '../charts/dateRange';
-import { weightsRange } from '../charts/weightsRange';
-import { xyToSvgPathData } from '../charts/xyToSvgPathData';
-import { WeightLogRecord } from '../WeightLogRecord';
+import { dateRange } from "../charts/dateRange";
+import { weightsRange } from "../charts/weightsRange";
+import { xyToSvgPathData } from "../charts/xyToSvgPathData";
+import { WeightLogRecord } from "../WeightLogRecord";
 
 enum TimeRange {
   ALL = "all",
@@ -92,7 +92,11 @@ export default function Chart(props: { data: Array<WeightLogRecord> }) {
           exclusive
           size="small"
           value={timeRange}
-          onChange={(e, v) => setTimeRange(v)}
+          onChange={(e, v) => {
+            if (v) {
+              setTimeRange(v);
+            }
+          }}
           classes={{ root: classes.timeRangeButtonGroup }}
         >
           <ToggleButton value={TimeRange.ALL}>All</ToggleButton>

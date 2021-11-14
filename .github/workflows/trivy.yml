@@ -1,9 +1,9 @@
-name: Tests
+name: Trivy
 on: [push]
 
 jobs:
   test:
-    name: Tests
+    name: Trivy # Check for vulnerable dependencies with Trivy
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -24,5 +24,13 @@ jobs:
             ${{ runner.OS }}-
       - name: Install modules
         run: npm install
-      - name: Run tests
-        run: npm test
+      
+      - name: Run Trivy on node_modules
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'library'
+          severity: 'CRITICAL,HIGH'

@@ -6,7 +6,6 @@ Simple and private body weight tracking.
 
 <p align="center">
 <a href="./img/screenshot.png"><img alt="Weight Logger PWA Screenshot" src="./img/screenshot_scaled.png"/></a>
-<a href="./img/screenshot_settings.png"><img alt="Weight Logger Settings Screenshot" src="./img/screenshot_settings_scaled.png"/></a>
 <br/>
 <a href="https://weight-logger.catdad.net/" title="Open Weight Logger PWA">Body Weight Logger. Simple and private.</a>
 </p>

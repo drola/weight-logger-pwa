@@ -1,4 +1,7 @@
-<img alt="Tests Results Badge" src="https://github.com/drola/weight-logger-pwa/workflows/Tests/badge.svg" align="right"/>
+<p align="right">
+  <img alt="Tests Results Badge" src="https://github.com/drola/weight-logger-pwa/workflows/Tests/badge.svg" />
+  <img alt="Trivy Scan Badge" src="https://github.com/drola/weight-logger-pwa/workflows/Trivy/badge.svg" />
+</p>
 
 # Weight Logger
 
